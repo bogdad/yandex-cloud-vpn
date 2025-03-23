@@ -109,7 +109,7 @@ then
     exit 1
 fi
 
-if ! [ -f ~/.ssh/id_rsa.pub ]
+if ! [ -f ~/.ssh/id_ed25519.pub ]
 then
     echo "Please generate an RSA ssh-key, storing the public key in '$HOME/.ssh/id_rsa.pub'."
     exit 1
@@ -127,9 +127,9 @@ echo 'Booting up a new server...'
 
 ip=$(yc compute instance create --name $INSTANCE_NAME \
     --zone ru-central1-a \
-    --ssh-key ~/.ssh/id_rsa.pub \
+    --ssh-key ~/.ssh/id_ed25519.pub \
     --public-ip \
-    --create-boot-disk "name=vpn-disk,auto-delete=true,size=8,image-folder-id=standard-images,image-family=ubuntu-2204-lts" \
+    --create-boot-disk "name=vpn-disk,auto-delete=true,size=10,image-folder-id=standard-images,image-family=ubuntu-2404-lts-oslogin" \
     --platform standard-v3 \
     --memory 1 \
     --cores 2 \
